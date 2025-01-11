@@ -35,6 +35,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PointerPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbdfe8f0-be37-40ad-b7fd-b451ce7a57be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""PointerPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48cfb251-d97e-43de-b3b0-a614ce46004d"",
+                    ""path"": ""<Pointer>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointerPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_PointerPosition = m_Player.FindAction("PointerPosition", throwIfNotFound: true);
+        m_Player_PointerPress = m_Player.FindAction("PointerPress", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -124,11 +145,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_PointerPosition;
+    private readonly InputAction m_Player_PointerPress;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @PointerPosition => m_Wrapper.m_Player_PointerPosition;
+        public InputAction @PointerPress => m_Wrapper.m_Player_PointerPress;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -141,6 +164,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PointerPosition.started += instance.OnPointerPosition;
             @PointerPosition.performed += instance.OnPointerPosition;
             @PointerPosition.canceled += instance.OnPointerPosition;
+            @PointerPress.started += instance.OnPointerPress;
+            @PointerPress.performed += instance.OnPointerPress;
+            @PointerPress.canceled += instance.OnPointerPress;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -148,6 +174,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @PointerPosition.started -= instance.OnPointerPosition;
             @PointerPosition.performed -= instance.OnPointerPosition;
             @PointerPosition.canceled -= instance.OnPointerPosition;
+            @PointerPress.started -= instance.OnPointerPress;
+            @PointerPress.performed -= instance.OnPointerPress;
+            @PointerPress.canceled -= instance.OnPointerPress;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -168,5 +197,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnPointerPosition(InputAction.CallbackContext context);
+        void OnPointerPress(InputAction.CallbackContext context);
     }
 }
