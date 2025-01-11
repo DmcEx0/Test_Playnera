@@ -11,5 +11,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<PlayerInputModel>(Lifetime.Singleton);
         
         builder.RegisterEntryPoint<PlayerInputController>();
+        builder.RegisterEntryPoint<DraggableItemController>();
     }
 }

@@ -208,3 +208,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Origin>k__BackingField: {fileID: 8302648497191485596}
+  <Rb>k__BackingField: {fileID: 5983815903694557925}
+  <Collider>k__BackingField: {fileID: 6693707863925786274}

@@ -12,9 +12,6 @@ namespace Source.Scripts.Controllers
         private readonly DraggableModel _draggableModel;
         private readonly PlayerInputModel _playerInputModel;
 
-        private IDraggable _currentDraggableItem;
-        private bool _isInteractionWithItem;
-
         public PlayerInputController(DraggableModel draggableModel, PlayerInputModel playerInputModel)
         {
             _draggableModel = draggableModel;
@@ -26,14 +23,12 @@ namespace Source.Scripts.Controllers
         public void Initialize()
         {
             _playerInput.Player.PointerPress.canceled += OnPointerCanceled;
-            
             _playerInput.Enable();
         }
 
         public void Dispose()
         {
             _playerInput.Player.PointerPress.canceled -= OnPointerCanceled;
-            
             _playerInput.Disable();
             _playerInput?.Dispose();
         }
@@ -41,28 +36,22 @@ namespace Source.Scripts.Controllers
         public void Tick()
         {
             DefineItemOnClick();
-            MoveDraggableItemToPointer();
-        }
-
-        private void MoveDraggableItemToPointer()
-        {
-            if (_isInteractionWithItem == false)
-            {
-                return;
-            }
-
-            var worldPosition = GetCalculatedWorldPosition();
-            _currentDraggableItem.Drag(worldPosition);
         }
 
         private void DefineItemOnClick()
         {
-            if (_playerInput.Player.PointerPress.IsPressed() == false)
+            var isPressed = _playerInput.Player.PointerPress.IsPressed();
+            
+            if (isPressed == false)
             {
                 return;
             }
 
+            _playerInputModel.SetPressedValue(true);
             var collider = GetHitOnClick().collider;
+            
+            var worldPosition = GetCalculatedWorldPosition();
+            _playerInputModel.SetPointerWorldPosition(worldPosition);
 
             if (collider == null)
             {
@@ -72,17 +61,15 @@ namespace Source.Scripts.Controllers
             if (collider.TryGetComponent(out IDraggable draggable))
             {
                 _draggableModel.SetDraggable(draggable);
-                _playerInputModel.SetPointerWorldPosition(GetCalculatedWorldPosition());
-                
-                _currentDraggableItem = draggable;
-                _isInteractionWithItem = true;
+                _playerInputModel.SetIsInteractionWithItemState(true);
             }
         }
 
         private void OnPointerCanceled(InputAction.CallbackContext ctx)
         {
-            _isInteractionWithItem = false;
-            _currentDraggableItem = null;
+            _playerInputModel.SetIsInteractionWithItemState(false);
+            _draggableModel.SetDraggable(null);
+            _playerInputModel.SetPressedValue(false);
         }
 
         private RaycastHit2D GetHitOnClick()
@@ -97,7 +84,7 @@ namespace Source.Scripts.Controllers
         {
             var pointerPosition = _playerInput.Player.PointerPosition.ReadValue<Vector2>();
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(pointerPosition);
-
+            
             return worldPosition;
         }
     }
