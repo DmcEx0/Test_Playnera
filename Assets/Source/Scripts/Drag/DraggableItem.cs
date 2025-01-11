@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Source.Scripts
 {
@@ -9,7 +11,8 @@ namespace Source.Scripts
         
         public void Drag(Vector2 position)
         {
-            
+            // gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.position, position, 1f);
+            gameObject.transform.localPosition = position;
         }
     }
 }
