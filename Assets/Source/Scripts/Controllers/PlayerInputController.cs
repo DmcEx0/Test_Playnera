@@ -10,25 +10,30 @@ namespace Source.Scripts.Controllers
     {
         private readonly PlayerInput _playerInput;
         private readonly DraggableModel _draggableModel;
+        private readonly PlayerInputModel _playerInputModel;
 
         private IDraggable _currentDraggableItem;
         private bool _isInteractionWithItem;
 
-        public PlayerInputController(DraggableModel draggableModel)
+        public PlayerInputController(DraggableModel draggableModel, PlayerInputModel playerInputModel)
         {
             _draggableModel = draggableModel;
+            _playerInputModel = playerInputModel;
+            
             _playerInput = new();
         }
 
         public void Initialize()
         {
             _playerInput.Player.PointerPress.canceled += OnPointerCanceled;
+            
             _playerInput.Enable();
         }
 
         public void Dispose()
         {
             _playerInput.Player.PointerPress.canceled -= OnPointerCanceled;
+            
             _playerInput.Disable();
             _playerInput?.Dispose();
         }
@@ -67,6 +72,7 @@ namespace Source.Scripts.Controllers
             if (collider.TryGetComponent(out IDraggable draggable))
             {
                 _draggableModel.SetDraggable(draggable);
+                _playerInputModel.SetPointerWorldPosition(GetCalculatedWorldPosition());
                 
                 _currentDraggableItem = draggable;
                 _isInteractionWithItem = true;
