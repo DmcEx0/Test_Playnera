@@ -1,19 +1,22 @@
 using System;
+using Source.Scripts.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-namespace Source.Scripts.Input
+namespace Source.Scripts.Controllers
 {
     public class PlayerInputController : IInitializable, IDisposable, ITickable
     {
         private readonly PlayerInput _playerInput;
+        private readonly DraggableModel _draggableModel;
 
         private IDraggable _currentDraggableItem;
         private bool _isInteractionWithItem;
 
-        public PlayerInputController()
+        public PlayerInputController(DraggableModel draggableModel)
         {
+            _draggableModel = draggableModel;
             _playerInput = new();
         }
 
@@ -63,6 +66,8 @@ namespace Source.Scripts.Input
 
             if (collider.TryGetComponent(out IDraggable draggable))
             {
+                _draggableModel.SetDraggable(draggable);
+                
                 _currentDraggableItem = draggable;
                 _isInteractionWithItem = true;
             }
