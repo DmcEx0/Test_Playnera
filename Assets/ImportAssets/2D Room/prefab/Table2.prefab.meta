@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ca97af1485ea432449b84314010f5f61
+timeCreated: 1527337576
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/Table2.prefab
+  uploadId: 248341

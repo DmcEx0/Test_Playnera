@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 48f49e47e3bf90248baa34f246c9b805
+timeCreated: 1527445232
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/shadow3.prefab
+  uploadId: 248341

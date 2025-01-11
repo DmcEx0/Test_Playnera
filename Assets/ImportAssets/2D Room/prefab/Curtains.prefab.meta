@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 29604f36edc26024582f639a081210fb
+timeCreated: 1527334085
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/Curtains.prefab
+  uploadId: 248341

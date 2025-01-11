@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 43468f0e377be6243b1fddb4b244634e
+timeCreated: 1527334587
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/Book2.prefab
+  uploadId: 248341

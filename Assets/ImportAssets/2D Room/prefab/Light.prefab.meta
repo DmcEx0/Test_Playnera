@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bd28e30f12f78be43902e191b2072e8d
+timeCreated: 1527334071
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/Light.prefab
+  uploadId: 248341

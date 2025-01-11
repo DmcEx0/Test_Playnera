@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 127a12bfbbf1d2541ad6ba4007556188
+timeCreated: 1527337580
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/Flower2.prefab
+  uploadId: 248341

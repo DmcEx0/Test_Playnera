@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4fecf1eb370a15748be98e06a2917fea
+timeCreated: 1527321684
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 119508
+  packageName: 2D Room
+  packageVersion: 1.0
+  assetPath: Assets/2D Room/prefab/Strip.prefab
+  uploadId: 248341
