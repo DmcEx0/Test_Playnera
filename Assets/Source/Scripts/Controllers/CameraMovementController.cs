@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Source.Scripts.Models;
 using UnityEngine;
@@ -11,6 +13,7 @@ namespace Source.Scripts.Controllers
         private readonly PlayerInputModel _playerInputModel;
         private readonly GameObject _background;
         private readonly Camera _camera;
+        private readonly CancellationTokenSource _tokenSource;
 
         private float _minX;
         private float _maxX;
@@ -24,17 +27,21 @@ namespace Source.Scripts.Controllers
             _playerInputModel = playerInputModel;
             _background = background;
             _camera = camera;
+
+            _tokenSource = new CancellationTokenSource();
         }
 
         public void Initialize()
         {
             CalculateMinMax();
 
-            _playerInputModel.PointerWorldPosition.Subscribe(MoveCamera);
+            _playerInputModel.PointerWorldPosition.Subscribe(MoveCamera).AddTo(_tokenSource.Token);
         }
 
         public void Dispose()
         {
+            _tokenSource?.Cancel();
+            _tokenSource.Dispose();
         }
 
         private void CalculateMinMax()

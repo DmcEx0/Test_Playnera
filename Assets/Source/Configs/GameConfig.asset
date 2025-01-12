@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DragSpeed>k__BackingField: 25
   <ItemScaleOnDrag>k__BackingField: 1.2
-  <ItemScaleMultiplyToLowerBound>k__BackingField: 0.1
+  <ItemMinScale>k__BackingField: 0.6
   <ItemAnimationDurationOnDrag>k__BackingField: 0.3
   <ItemAnimationDurationAfterDrag>k__BackingField: 0.5
   <ItemLayerMask>k__BackingField:

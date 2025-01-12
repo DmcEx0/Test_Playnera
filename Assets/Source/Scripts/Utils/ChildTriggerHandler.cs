@@ -1,5 +1,4 @@
-﻿using System;
-using Source.Scripts.View;
+﻿using Source.Scripts.View;
 using UnityEngine;
 
 namespace Source.Scripts.Utils

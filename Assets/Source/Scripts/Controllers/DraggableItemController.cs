@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using Source.Scripts.Configs;
 using Source.Scripts.Models;
 using Source.Scripts.Utils;
 using Source.Scripts.View;

@@ -5,17 +5,17 @@ namespace Source.Scripts.Models
 {
     public class DraggableModel
     {
-        private readonly AsyncReactiveProperty<IDraggable> _newDraggable;
-        public IAsyncReactiveProperty<IDraggable> Draggable => _newDraggable;
+        private readonly AsyncReactiveProperty<IDraggable> _draggable;
+        public IAsyncReactiveProperty<IDraggable> Draggable => _draggable;
 
         public DraggableModel()
         {
-            _newDraggable = new AsyncReactiveProperty<IDraggable>(null);
+            _draggable = new AsyncReactiveProperty<IDraggable>(null);
         }
         
         public void SetDraggable(IDraggable draggable)
         {
-            Draggable.Value = draggable;
+            _draggable.Value = draggable;
         }
     }
 }

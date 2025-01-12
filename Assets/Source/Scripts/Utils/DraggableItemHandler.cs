@@ -56,10 +56,12 @@ namespace Source.Scripts.Utils
         {
             var bgHeight = _background.bounds.size.y;
             float currentY = draggableItemView.transform.position.y - GetDistanceToFloor(draggableItemView);
-            var minY = (bgHeight / 2) - bgHeight;
-            var maxY = (bgHeight / 2);
+            
+            float minY = (bgHeight / 2) - bgHeight;
+            float maxY = (bgHeight / 2);
+            
             float t = Mathf.InverseLerp(minY, maxY, currentY);
-            float scale = Mathf.Lerp(1, 0.6f, t);
+            float scale = Mathf.Lerp(DefaultScale, _gameConfig.ItemMinScale, t);
 
             return new Vector3(scale, scale, 1);
         }
