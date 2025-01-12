@@ -29,7 +29,7 @@ namespace Source.Scripts.Controllers
             _draggableModel = draggableModel;
             _playerInputModel = playerInputModel;
             _draggableItemHandler = draggableItemHandler;
-            
+
             _tokenSource = new CancellationTokenSource();
         }
 
@@ -47,7 +47,8 @@ namespace Source.Scripts.Controllers
 
         private void DragItemToPointer(Vector3 pointerWorldPosition)
         {
-            if (_isHaveDraggableItemView == false || _playerInputModel.IsInteractionWithItem == false)
+            if (pointerWorldPosition == Vector3.zero || _isHaveDraggableItemView == false ||
+                _playerInputModel.IsInteractionWithItem == false)
             {
                 return;
             }
