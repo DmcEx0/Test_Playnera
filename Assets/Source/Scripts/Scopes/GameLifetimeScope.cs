@@ -17,9 +17,10 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.RegisterComponent(_gameConfig);
         
-        builder.Register<DraggableModel>(Lifetime.Singleton);
-        builder.Register<PlayerInputModel>(Lifetime.Singleton);
         builder.Register<DraggableItemHandler>(Lifetime.Singleton).WithParameter(_background);
+        
+        builder.Register<DraggableModel>(Lifetime.Singleton).AsImplementedInterfaces();
+        builder.Register<PlayerInputModel>(Lifetime.Singleton).AsImplementedInterfaces();
         
         builder.RegisterEntryPoint<DraggableItemController>();
         builder.RegisterEntryPoint<PlayerInputController>().WithParameter(_camera);

@@ -13,14 +13,14 @@ namespace Source.Scripts.Controllers
         private const float RayDistance = 100f;
 
         private readonly PlayerInput _playerInput;
-        private readonly DraggableModel _draggableModel;
-        private readonly PlayerInputModel _playerInputModel;
+        private readonly IDraggableModel _draggableModel;
+        private readonly IPlayerInputModel _playerInputModel;
         private readonly Camera _camera;
         private readonly GameConfig _gameConfig;
 
         public PlayerInputController(
-            DraggableModel draggableModel,
-            PlayerInputModel playerInputModel,
+            IDraggableModel draggableModel,
+            IPlayerInputModel playerInputModel,
             Camera camera,
             GameConfig gameConfig)
         {

@@ -12,8 +12,8 @@ namespace Source.Scripts.Controllers
 {
     public class DraggableItemController : IInitializable, IDisposable
     {
-        private readonly DraggableModel _draggableModel;
-        private readonly PlayerInputModel _playerInputModel;
+        private readonly IDraggableModel _draggableModel;
+        private readonly IPlayerInputModel _playerInputModel;
         private readonly DraggableItemHandler _draggableItemHandler;
 
         private readonly CancellationTokenSource _tokenSource;
@@ -22,8 +22,8 @@ namespace Source.Scripts.Controllers
         private bool _isHaveDraggableItemView;
 
         public DraggableItemController(
-            DraggableModel draggableModel,
-            PlayerInputModel playerInputModel,
+            IDraggableModel draggableModel,
+            IPlayerInputModel playerInputModel,
             DraggableItemHandler draggableItemHandler)
         {
             _draggableModel = draggableModel;

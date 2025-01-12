@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Source.Scripts.Models
 {
     //модель для связи между контроллерами
-    public class PlayerInputModel
+    public class PlayerInputModel : IPlayerInputModel
     {
         private readonly AsyncReactiveProperty<Vector3> _pointerWorldPosition;
         public IReadOnlyAsyncReactiveProperty<Vector3> PointerWorldPosition => _pointerWorldPosition;

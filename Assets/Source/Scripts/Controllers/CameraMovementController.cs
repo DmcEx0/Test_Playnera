@@ -10,7 +10,7 @@ namespace Source.Scripts.Controllers
 {
     public class CameraMovementController : IInitializable, IDisposable
     {
-        private readonly PlayerInputModel _playerInputModel;
+        private readonly IPlayerInputModel _playerInputModel;
         private readonly GameObject _background;
         private readonly Camera _camera;
         private readonly CancellationTokenSource _tokenSource;
@@ -22,7 +22,7 @@ namespace Source.Scripts.Controllers
         
         private bool _firstClick = true;
 
-        public CameraMovementController(PlayerInputModel playerInputModel, GameObject background, Camera camera)
+        public CameraMovementController(IPlayerInputModel playerInputModel, GameObject background, Camera camera)
         {
             _playerInputModel = playerInputModel;
             _background = background;
