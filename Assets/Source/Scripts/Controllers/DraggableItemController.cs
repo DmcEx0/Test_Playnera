@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Source.Scripts.Configs;
 using Source.Scripts.Models;
 using Source.Scripts.Utils;
 using Source.Scripts.View;
@@ -21,14 +22,16 @@ namespace Source.Scripts.Controllers
         private DraggableItemView _currentDraggableItemView;
         private bool _isHaveDraggableItemView;
 
-        public DraggableItemController(DraggableModel draggableModel, PlayerInputModel playerInputModel)
+        public DraggableItemController(
+            DraggableModel draggableModel,
+            PlayerInputModel playerInputModel,
+            DraggableItemHandler draggableItemHandler)
         {
             _draggableModel = draggableModel;
             _playerInputModel = playerInputModel;
-
+            _draggableItemHandler = draggableItemHandler;
+            
             _tokenSource = new CancellationTokenSource();
-
-            _draggableItemHandler = new DraggableItemHandler();
         }
 
         public void Initialize()

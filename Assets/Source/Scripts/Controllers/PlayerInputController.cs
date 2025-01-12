@@ -1,4 +1,5 @@
 using System;
+using Source.Scripts.Configs;
 using Source.Scripts.Models;
 using Source.Scripts.View;
 using UnityEngine;
@@ -9,19 +10,25 @@ namespace Source.Scripts.Controllers
 {
     public class PlayerInputController : IInitializable, IDisposable, ITickable
     {
-        private const int ItemLayerMask = 1 << 6;
-        
+        private const float RayDistance = 100f;
+
         private readonly PlayerInput _playerInput;
         private readonly DraggableModel _draggableModel;
         private readonly PlayerInputModel _playerInputModel;
         private readonly Camera _camera;
+        private readonly GameConfig _gameConfig;
 
-        public PlayerInputController(DraggableModel draggableModel, PlayerInputModel playerInputModel, Camera camera)
+        public PlayerInputController(
+            DraggableModel draggableModel,
+            PlayerInputModel playerInputModel,
+            Camera camera,
+            GameConfig gameConfig)
         {
             _draggableModel = draggableModel;
             _playerInputModel = playerInputModel;
             _camera = camera;
-            
+            _gameConfig = gameConfig;
+
             _playerInput = new();
         }
 
@@ -29,7 +36,7 @@ namespace Source.Scripts.Controllers
         {
             _playerInput.Player.PointerPress.started += OnPointerStarted;
             _playerInput.Player.PointerPress.canceled += OnPointerCanceled;
-            
+
             _playerInput.Enable();
         }
 
@@ -37,7 +44,7 @@ namespace Source.Scripts.Controllers
         {
             _playerInput.Player.PointerPress.started -= OnPointerStarted;
             _playerInput.Player.PointerPress.canceled -= OnPointerCanceled;
-            
+
             _playerInput.Disable();
         }
 
@@ -52,11 +59,11 @@ namespace Source.Scripts.Controllers
             {
                 return;
             }
-            
+
             var worldPosition = GetCalculatedWorldPosition();
             _playerInputModel.SetPointerWorldPosition(worldPosition);
         }
-        
+
         private void OnPointerStarted(InputAction.CallbackContext ctx)
         {
             var collider = GetHitOnClick().collider;
@@ -65,11 +72,11 @@ namespace Source.Scripts.Controllers
             {
                 return;
             }
-
+            
             if (collider.TryGetComponent(out IDraggable draggable))
             {
                 _playerInputModel.SetStartPointerPosition(GetCalculatedWorldPosition());
-                
+
                 _draggableModel.SetDraggable(draggable);
                 _playerInputModel.SetIsInteractionWithItemState(true);
             }
@@ -85,7 +92,8 @@ namespace Source.Scripts.Controllers
         private RaycastHit2D GetHitOnClick()
         {
             var worldPosition = GetCalculatedWorldPosition();
-            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero, 100f, ItemLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero, RayDistance,
+                _gameConfig.ItemLayerMask);
 
             return hit;
         }
@@ -94,7 +102,7 @@ namespace Source.Scripts.Controllers
         {
             var pointerPosition = _playerInput.Player.PointerPosition.ReadValue<Vector2>();
             Vector3 worldPosition = _camera.ScreenToWorldPoint(pointerPosition);
-            
+
             return worldPosition;
         }
     }

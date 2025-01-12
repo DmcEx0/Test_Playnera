@@ -775,6 +775,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _background: {fileID: 247449862}
   _camera: {fileID: 519420031}
+  _gameConfig: {fileID: 11400000, guid: 0f296231955cc594cbafb2ea09d0594c, type: 2}
 --- !u!4 &1345508239
 Transform:
   m_ObjectHideFlags: 0
