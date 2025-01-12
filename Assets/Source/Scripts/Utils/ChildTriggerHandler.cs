@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Source.Scripts.Utils
 {
+    //вспомогательный класс для дочернего коллайдера предмета, реагирующий на столкновения с другими коллайдерами
     [RequireComponent(typeof(Collider2D))]
     public class ChildTriggerHandler : MonoBehaviour
     {

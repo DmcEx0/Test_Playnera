@@ -31,6 +31,8 @@ namespace Source.Scripts.Controllers
             _tokenSource = new CancellationTokenSource();
         }
 
+        //Скрипт управляет движением камеры по сцене, основываясь на размере спрайта бэкграунда
+        //для отслеживания зажатия поинтера использутеся реактивное свойство и подписка на него
         public void Initialize()
         {
             CalculateMinMax();
@@ -70,7 +72,7 @@ namespace Source.Scripts.Controllers
 
             var posX = pointerWorldPosition.x - _previousPointerPosition.x;
             
-            if (Mathf.Abs(posX) < 0.01f)
+            if (Mathf.Abs(posX) < 0.01f) // исключение минимального перемещения
             {
                 return;
             }

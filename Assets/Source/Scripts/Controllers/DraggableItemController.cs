@@ -33,6 +33,9 @@ namespace Source.Scripts.Controllers
             _tokenSource = new CancellationTokenSource();
         }
 
+        //скрипт отвечает за перемещение объектов, которые можно перетаскивать
+        //используется реактивное свойство для определения, на какой предмет нажал игрок,
+        //чтобы в дальнейшем им манипулировать
         public void Initialize()
         {
             _playerInputModel.PointerWorldPosition.Subscribe(DragItemToPointer).AddTo(_tokenSource.Token);
@@ -56,7 +59,9 @@ namespace Source.Scripts.Controllers
             _draggableItemHandler.Drag(_currentDraggableItemView, pointerWorldPosition);
         }
 
-        private void ConfigureNewDraggable(IDraggable draggable)
+        //поскольку вызывается, когда игрок нажал на предмет и отпустил его,
+        //вызываем методы для начала и окончания перетаскивания
+        private void ConfigureNewDraggable(IDraggable draggable) 
         {
             if (_isHaveDraggableItemView)
             {
@@ -71,6 +76,7 @@ namespace Source.Scripts.Controllers
             }
         }
 
+        //кастим из интерфейса в конкретный тип
         private void CastingDraggableItemView(IDraggable draggable)
         {
             if (draggable is DraggableItemView draggableItemView)

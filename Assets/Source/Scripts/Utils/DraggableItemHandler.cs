@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Source.Scripts.Utils
 {
+    //класс-обработчик для предметов
     public class DraggableItemHandler
     {
         private const float DefaultScale = 1f;
@@ -52,10 +53,11 @@ namespace Source.Scripts.Utils
             }
         }
 
+        //вычисляем размер предмета относительно высоты фона. Эффект перспективы
         private Vector3 GetScaleYRelativeToBackground(DraggableItemView draggableItemView)
         {
             var bgHeight = _background.bounds.size.y;
-            float currentY = draggableItemView.transform.position.y - GetDistanceToFloor(draggableItemView);
+            float currentY = draggableItemView.transform.position.y - GetDistanceToCollidersUnderItem(draggableItemView);
             
             float minY = (bgHeight / 2) - bgHeight;
             float maxY = (bgHeight / 2);
@@ -66,7 +68,8 @@ namespace Source.Scripts.Utils
             return new Vector3(scale, scale, 1);
         }
 
-        private float GetDistanceToFloor(DraggableItemView draggableItemView)
+        //находим расстояние до ближайшего коллайдера под предметом для корректного определения размера 
+        private float GetDistanceToCollidersUnderItem(DraggableItemView draggableItemView)
         {
             RaycastHit2D hit = Physics2D.Raycast(draggableItemView.ChildTriggerHandler.transform.position,
                 Vector2.down, 100f, ~_gameConfig.ItemLayerMask);

@@ -3,6 +3,7 @@ using Source.Scripts.View;
 
 namespace Source.Scripts.Models
 {
+    //модель для связи между контроллерами
     public class DraggableModel
     {
         private readonly AsyncReactiveProperty<IDraggable> _draggable;

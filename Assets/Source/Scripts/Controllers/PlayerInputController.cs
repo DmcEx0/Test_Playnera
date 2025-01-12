@@ -31,7 +31,8 @@ namespace Source.Scripts.Controllers
 
             _playerInput = new();
         }
-
+        
+        //скрипт для обработки ввода игрока с использованием New Input System. Класс PlayerInput - автогенерируемый
         public void Initialize()
         {
             _playerInput.Player.PointerPress.started += OnPointerStarted;
@@ -53,7 +54,8 @@ namespace Source.Scripts.Controllers
             DefinePointerPositionOnPressed();
         }
 
-        private void DefinePointerPositionOnPressed()
+        // проверка нажатия поинтера, если нажата - определение позиции поинтера в мировых координатах
+        private void DefinePointerPositionOnPressed() 
         {
             if (_playerInput.Player.PointerPress.IsPressed() == false)
             {
@@ -73,15 +75,17 @@ namespace Source.Scripts.Controllers
                 return;
             }
             
-            if (collider.TryGetComponent(out IDraggable draggable))
+            if (collider.TryGetComponent(out IDraggable draggable)) // обработка нажатия на предмет 
             {
-                _playerInputModel.SetStartPointerPosition(GetCalculatedWorldPosition());
+                //определение позиции поинтера в момент клика, для корректного перемещения предмета, относительно поинтера
+                _playerInputModel.SetStartPointerPosition(GetCalculatedWorldPosition()); 
 
                 _draggableModel.SetDraggable(draggable);
                 _playerInputModel.SetIsInteractionWithItemState(true);
             }
         }
 
+        //устанавливаем значения, для вызовов реактивных свойств
         private void OnPointerCanceled(InputAction.CallbackContext ctx)
         {
             _playerInputModel.SetPointerWorldPosition(Vector3.zero);

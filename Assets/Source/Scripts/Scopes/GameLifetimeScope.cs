@@ -11,6 +11,8 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private GameObject _background;
     [SerializeField] private Camera _camera;
     [SerializeField] private GameConfig _gameConfig;
+    
+    //Регистрация зависимостей
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponent(_gameConfig);

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Source.Scripts.Models
 {
+    //модель для связи между контроллерами
     public class PlayerInputModel
     {
         private readonly AsyncReactiveProperty<Vector3> _pointerWorldPosition;
