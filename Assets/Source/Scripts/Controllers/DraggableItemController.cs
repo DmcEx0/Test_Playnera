@@ -25,7 +25,7 @@ namespace Source.Scripts.Controllers
 
         public void Initialize()
         {
-            _playerInputModel.IsPressed.Subscribe(MoveItemToPointer).AddTo(_tokenSource.Token);
+            _playerInputModel.PointerWorldPosition.Subscribe(MoveItemToPointer).AddTo(_tokenSource.Token);
             _playerInputModel.IsInteractionWithItem.Subscribe(ConfigureItemOnInteraction).AddTo(_tokenSource.Token);
         }
 
@@ -35,16 +35,15 @@ namespace Source.Scripts.Controllers
             _tokenSource.Dispose();
         }
 
-        private void MoveItemToPointer(bool isPressed)
+        private void MoveItemToPointer(Vector3 pointerWorldPosition)
         {
-            if (isPressed == false || _draggableModel.Draggable == null ||
-                _playerInputModel.IsInteractionWithItem.Value == false)
+            if(pointerWorldPosition == Vector3.zero || _draggableModel.Draggable == null ||
+               _playerInputModel.IsInteractionWithItem.Value == false)
             {
                 return;
             }
 
-            var worldPosition = _playerInputModel.PointerWorldPosition;
-            _draggableModel.Draggable.Drag(worldPosition);
+            _draggableModel.Draggable.Drag(pointerWorldPosition);
         }
 
         private void ConfigureItemOnInteraction(bool isInteractionWithItem)

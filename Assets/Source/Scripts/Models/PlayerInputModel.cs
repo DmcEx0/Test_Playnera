@@ -5,27 +5,21 @@ namespace Source.Scripts.Models
 {
     public class PlayerInputModel
     {
-        private readonly AsyncReactiveProperty<bool> _isPressed;
         private readonly AsyncReactiveProperty<bool> _isInteractionWithItem;
-        public IReadOnlyAsyncReactiveProperty<bool> IsPressed => _isPressed;
+        private readonly AsyncReactiveProperty<Vector3> _pointerWorldPosition;
         public IReadOnlyAsyncReactiveProperty<bool> IsInteractionWithItem => _isInteractionWithItem;
+        public IReadOnlyAsyncReactiveProperty<Vector3> PointerWorldPosition => _pointerWorldPosition;
         
-        public Vector3 PointerWorldPosition { get; private set; }
 
         public PlayerInputModel()
         {
-            _isPressed = new AsyncReactiveProperty<bool>(false);
             _isInteractionWithItem = new AsyncReactiveProperty<bool>(false);
+            _pointerWorldPosition = new AsyncReactiveProperty<Vector3>(Vector3.zero);
         }
         
         public void SetPointerWorldPosition(Vector3 pointerWorldPosition)
         {
-            PointerWorldPosition = pointerWorldPosition;
-        }
-        
-        public void SetPressedValue(bool isPressed)
-        {
-            _isPressed.Value = isPressed;
+            _pointerWorldPosition.Value = pointerWorldPosition;
         }
         
         public void SetIsInteractionWithItemState(bool isInteractionWithItem)

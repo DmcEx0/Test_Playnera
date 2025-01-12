@@ -11,11 +11,13 @@ namespace Source.Scripts.Controllers
         private readonly PlayerInput _playerInput;
         private readonly DraggableModel _draggableModel;
         private readonly PlayerInputModel _playerInputModel;
+        private readonly Camera _camera;
 
-        public PlayerInputController(DraggableModel draggableModel, PlayerInputModel playerInputModel)
+        public PlayerInputController(DraggableModel draggableModel, PlayerInputModel playerInputModel, Camera camera)
         {
             _draggableModel = draggableModel;
             _playerInputModel = playerInputModel;
+            _camera = camera;
             
             _playerInput = new();
         }
@@ -40,14 +42,11 @@ namespace Source.Scripts.Controllers
 
         private void DefineItemOnClick()
         {
-            var isPressed = _playerInput.Player.PointerPress.IsPressed();
-            
-            if (isPressed == false)
+            if (_playerInput.Player.PointerPress.IsPressed() == false)
             {
                 return;
             }
 
-            _playerInputModel.SetPressedValue(true);
             var collider = GetHitOnClick().collider;
             
             var worldPosition = GetCalculatedWorldPosition();
@@ -67,9 +66,9 @@ namespace Source.Scripts.Controllers
 
         private void OnPointerCanceled(InputAction.CallbackContext ctx)
         {
-            _playerInputModel.SetIsInteractionWithItemState(false);
+            _playerInputModel.SetPointerWorldPosition(Vector3.zero);
             _draggableModel.SetDraggable(null);
-            _playerInputModel.SetPressedValue(false);
+            _playerInputModel.SetIsInteractionWithItemState(false);
         }
 
         private RaycastHit2D GetHitOnClick()
@@ -83,7 +82,7 @@ namespace Source.Scripts.Controllers
         private Vector3 GetCalculatedWorldPosition()
         {
             var pointerPosition = _playerInput.Player.PointerPosition.ReadValue<Vector2>();
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(pointerPosition);
+            Vector3 worldPosition = _camera.ScreenToWorldPoint(pointerPosition);
             
             return worldPosition;
         }
