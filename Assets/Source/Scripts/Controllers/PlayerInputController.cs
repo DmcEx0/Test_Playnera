@@ -1,5 +1,6 @@
 using System;
 using Source.Scripts.Models;
+using Source.Scripts.View;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
@@ -26,6 +27,7 @@ namespace Source.Scripts.Controllers
         {
             _playerInput.Player.PointerPress.started += OnPointerStarted;
             _playerInput.Player.PointerPress.canceled += OnPointerCanceled;
+            
             _playerInput.Enable();
         }
 
@@ -33,8 +35,8 @@ namespace Source.Scripts.Controllers
         {
             _playerInput.Player.PointerPress.started -= OnPointerStarted;
             _playerInput.Player.PointerPress.canceled -= OnPointerCanceled;
+            
             _playerInput.Disable();
-            _playerInput?.Dispose();
         }
 
         public void Tick()

@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Source.Scripts.Models;
 using Source.Scripts.Utils;
+using Source.Scripts.View;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -13,9 +14,12 @@ namespace Source.Scripts.Controllers
     {
         private readonly DraggableModel _draggableModel;
         private readonly PlayerInputModel _playerInputModel;
-        private readonly DraggableItem _draggableItem;
+        private readonly DraggableItemHandler _draggableItemHandler;
 
         private readonly CancellationTokenSource _tokenSource;
+
+        private DraggableItemView _currentDraggableItemView;
+        private bool _isHaveDraggableItemView;
 
         public DraggableItemController(DraggableModel draggableModel, PlayerInputModel playerInputModel)
         {
@@ -24,13 +28,12 @@ namespace Source.Scripts.Controllers
 
             _tokenSource = new CancellationTokenSource();
 
-            _draggableItem = new DraggableItem();
+            _draggableItemHandler = new DraggableItemHandler();
         }
 
         public void Initialize()
         {
             _playerInputModel.PointerWorldPosition.Subscribe(DragItemToPointer).AddTo(_tokenSource.Token);
-            // _playerInputModel.IsInteractionWithItem.Subscribe(ConfigureItemWithInteraction).AddTo(_tokenSource.Token);
             _draggableModel.Draggable.Subscribe(ConfigureNewDraggable).AddTo(_tokenSource.Token);
         }
 
@@ -42,21 +45,39 @@ namespace Source.Scripts.Controllers
 
         private void DragItemToPointer(Vector3 pointerWorldPosition)
         {
-            if (_draggableModel.Draggable.Value == null || _playerInputModel.IsInteractionWithItem.Value == false)
+            if (_isHaveDraggableItemView == false || _playerInputModel.IsInteractionWithItem == false)
             {
                 return;
             }
 
-            _draggableModel.NewDraggable.Drag(pointerWorldPosition);
+            _draggableItemHandler.Drag(_currentDraggableItemView, pointerWorldPosition);
         }
-
-        // private void ConfigureItemWithInteraction(bool isInteractionWithItem)
-        // {
-        // }
 
         private void ConfigureNewDraggable(IDraggable draggable)
         {
-            _ = _draggableItem.TrySetDraggableItem(draggable);
+            if (_isHaveDraggableItemView)
+            {
+                _draggableItemHandler.EndDrag(_currentDraggableItemView);
+            }
+
+            CastingDraggableItemView(draggable);
+
+            if (_isHaveDraggableItemView)
+            {
+                _draggableItemHandler.StartDrag(_currentDraggableItemView);
+            }
+        }
+
+        private void CastingDraggableItemView(IDraggable draggable)
+        {
+            if (draggable is DraggableItemView draggableItemView)
+            {
+                _currentDraggableItemView = draggableItemView;
+                _isHaveDraggableItemView = true;
+                return;
+            }
+
+            _isHaveDraggableItemView = false;
         }
     }
 }

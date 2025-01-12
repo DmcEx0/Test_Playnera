@@ -438,6 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888282972}
   - component: {fileID: 888282973}
+  - component: {fileID: 888282974}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -517,6 +518,18 @@ PolygonCollider2D:
       - {x: 2.116356, y: -0.28706622}
       - {x: 1.752624, y: 0.19717044}
   m_UseDelaunayMesh: 0
+--- !u!114 &888282974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888282971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0155ae98fc7b466c9214d6787cee42da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &914136607
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 914136608}
   - component: {fileID: 914136609}
+  - component: {fileID: 914136610}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -599,8 +613,20 @@ PolygonCollider2D:
       - {x: -27.406548, y: -2.0409033}
       - {x: -30.34102, y: -5.1202574}
       - {x: 30.284294, y: -5.1202574}
-      - {x: 28.184347, y: -2.2917745}
+      - {x: 27.981403, y: -1.8182397}
   m_UseDelaunayMesh: 0
+--- !u!114 &914136610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914136607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0155ae98fc7b466c9214d6787cee42da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1345508237
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,9 +718,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 707852130709695270, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1399129268572037062, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
       propertyPath: m_Name
       value: Flower2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399129268572037062, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1399129268572037062, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
       propertyPath: m_IsActive
@@ -702,7 +736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4723909140289793124, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.40839
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4723909140289793124, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -755,6 +789,10 @@ PrefabInstance:
     - target: {fileID: 6693707863925786274, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693707863925786274, guid: b003561a1033c624abc5fad6bc2260bb, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

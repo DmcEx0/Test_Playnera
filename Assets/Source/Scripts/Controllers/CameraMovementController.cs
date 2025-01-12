@@ -55,7 +55,7 @@ namespace Source.Scripts.Controllers
         
         private void MoveCamera(Vector3 pointerWorldPosition)
         {
-            if (pointerWorldPosition == Vector3.zero || _playerInputModel.IsInteractionWithItem.Value)
+            if (pointerWorldPosition == Vector3.zero || _playerInputModel.IsInteractionWithItem)
             {
                 _firstClick = true;
                 return;
