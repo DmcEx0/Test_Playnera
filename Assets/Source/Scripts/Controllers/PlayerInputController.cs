@@ -9,6 +9,8 @@ namespace Source.Scripts.Controllers
 {
     public class PlayerInputController : IInitializable, IDisposable, ITickable
     {
+        private const int ItemLayerMask = 1 << 6;
+        
         private readonly PlayerInput _playerInput;
         private readonly DraggableModel _draggableModel;
         private readonly PlayerInputModel _playerInputModel;
@@ -66,6 +68,8 @@ namespace Source.Scripts.Controllers
 
             if (collider.TryGetComponent(out IDraggable draggable))
             {
+                _playerInputModel.SetStartPointerPosition(GetCalculatedWorldPosition());
+                
                 _draggableModel.SetDraggable(draggable);
                 _playerInputModel.SetIsInteractionWithItemState(true);
             }
@@ -81,7 +85,7 @@ namespace Source.Scripts.Controllers
         private RaycastHit2D GetHitOnClick()
         {
             var worldPosition = GetCalculatedWorldPosition();
-            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero, 100f, ItemLayerMask);
 
             return hit;
         }

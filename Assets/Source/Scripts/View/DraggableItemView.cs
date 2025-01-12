@@ -1,4 +1,5 @@
 ﻿using System;
+using Source.Scripts.Utils;
 using UnityEngine;
 
 namespace Source.Scripts.View
@@ -9,46 +10,6 @@ namespace Source.Scripts.View
         [field: SerializeField] public Transform Origin { get; private set; }
         [field: SerializeField] public Rigidbody2D Rb { get; private set; }
         [field: SerializeField] public Collider2D Collider { get; private set; }
-        
-        public bool IsInsidePlaceable { get; private set; }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            Debug.Log("!!!");
-            if(other.collider.TryGetComponent(out IPlaceable placeable))
-            {
-                Debug.Log("???");
-
-                IsInsidePlaceable = true;
-            }
-        }
-        
-        private void OnCollisionExit(Collision other)
-        {
-            if(other.collider.TryGetComponent(out IPlaceable placeable))
-            {
-                IsInsidePlaceable = false;
-            }
-        }
-        
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            Debug.Log("!!!");
-
-            if(other.TryGetComponent(out IPlaceable placeable))
-            {
-                Debug.Log("???");
-
-                IsInsidePlaceable = false;
-            }
-        }
-        
-        private void OnTriggerExit(Collider other)
-        {
-            if(other.TryGetComponent(out IPlaceable placeable))
-            {
-                IsInsidePlaceable = false;
-            }
-        }
+        [field: SerializeField] public ChildTriggerHandler ChildTriggerHandler { get; private set; }
     }
 }

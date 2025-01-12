@@ -8,6 +8,7 @@ namespace Source.Scripts.Models
         private readonly AsyncReactiveProperty<Vector3> _pointerWorldPosition;
         public IReadOnlyAsyncReactiveProperty<Vector3> PointerWorldPosition => _pointerWorldPosition;
         public bool IsInteractionWithItem { get; private set; }
+        public Vector3 StartPointerPosition { get; private set; }
 
         public PlayerInputModel()
         {
@@ -22,6 +23,11 @@ namespace Source.Scripts.Models
         public void SetIsInteractionWithItemState(bool isInteractionWithItem)
         {
             IsInteractionWithItem = isInteractionWithItem;
+        }
+        
+        public void SetStartPointerPosition(Vector3 startPointerPosition)
+        {
+            StartPointerPosition = startPointerPosition;
         }
     }
 }

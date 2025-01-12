@@ -64,7 +64,7 @@ namespace Source.Scripts.Controllers
 
             if (_isHaveDraggableItemView)
             {
-                _draggableItemHandler.StartDrag(_currentDraggableItemView);
+                _draggableItemHandler.StartDrag(_currentDraggableItemView, _playerInputModel.StartPointerPosition);
             }
         }
 
