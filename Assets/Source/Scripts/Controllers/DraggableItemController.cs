@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Source.Scripts.Models;
+using Source.Scripts.Utils;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -12,6 +13,7 @@ namespace Source.Scripts.Controllers
     {
         private readonly DraggableModel _draggableModel;
         private readonly PlayerInputModel _playerInputModel;
+        private readonly DraggableItem _draggableItem;
 
         private readonly CancellationTokenSource _tokenSource;
 
@@ -21,12 +23,15 @@ namespace Source.Scripts.Controllers
             _playerInputModel = playerInputModel;
 
             _tokenSource = new CancellationTokenSource();
+
+            _draggableItem = new DraggableItem();
         }
 
         public void Initialize()
         {
-            _playerInputModel.PointerWorldPosition.Subscribe(MoveItemToPointer).AddTo(_tokenSource.Token);
-            _playerInputModel.IsInteractionWithItem.Subscribe(ConfigureItemOnInteraction).AddTo(_tokenSource.Token);
+            _playerInputModel.PointerWorldPosition.Subscribe(DragItemToPointer).AddTo(_tokenSource.Token);
+            // _playerInputModel.IsInteractionWithItem.Subscribe(ConfigureItemWithInteraction).AddTo(_tokenSource.Token);
+            _draggableModel.Draggable.Subscribe(ConfigureNewDraggable).AddTo(_tokenSource.Token);
         }
 
         public void Dispose()
@@ -35,32 +40,23 @@ namespace Source.Scripts.Controllers
             _tokenSource.Dispose();
         }
 
-        private void MoveItemToPointer(Vector3 pointerWorldPosition)
+        private void DragItemToPointer(Vector3 pointerWorldPosition)
         {
-            if(pointerWorldPosition == Vector3.zero || _draggableModel.Draggable == null ||
-               _playerInputModel.IsInteractionWithItem.Value == false)
+            if (_draggableModel.Draggable.Value == null || _playerInputModel.IsInteractionWithItem.Value == false)
             {
                 return;
             }
 
-            _draggableModel.Draggable.Drag(pointerWorldPosition);
+            _draggableModel.NewDraggable.Drag(pointerWorldPosition);
         }
 
-        private void ConfigureItemOnInteraction(bool isInteractionWithItem)
+        // private void ConfigureItemWithInteraction(bool isInteractionWithItem)
+        // {
+        // }
+
+        private void ConfigureNewDraggable(IDraggable draggable)
         {
-            if(_draggableModel.Draggable == null)
-            {
-                return;
-            }
-            
-            if (isInteractionWithItem)
-            {
-                _draggableModel.Draggable.Rb.bodyType = RigidbodyType2D.Kinematic;
-                
-                return;
-            }
-            
-            _draggableModel.Draggable.Rb.bodyType = RigidbodyType2D.Dynamic;
+            _ = _draggableItem.TrySetDraggableItem(draggable);
         }
     }
 }

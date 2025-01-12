@@ -24,12 +24,14 @@ namespace Source.Scripts.Controllers
 
         public void Initialize()
         {
+            _playerInput.Player.PointerPress.started += OnPointerStarted;
             _playerInput.Player.PointerPress.canceled += OnPointerCanceled;
             _playerInput.Enable();
         }
 
         public void Dispose()
         {
+            _playerInput.Player.PointerPress.started -= OnPointerStarted;
             _playerInput.Player.PointerPress.canceled -= OnPointerCanceled;
             _playerInput.Disable();
             _playerInput?.Dispose();
@@ -37,20 +39,23 @@ namespace Source.Scripts.Controllers
 
         public void Tick()
         {
-            DefineItemOnClick();
+            DefinePointerPositionOnPressed();
         }
 
-        private void DefineItemOnClick()
+        private void DefinePointerPositionOnPressed()
         {
             if (_playerInput.Player.PointerPress.IsPressed() == false)
             {
                 return;
             }
-
-            var collider = GetHitOnClick().collider;
             
             var worldPosition = GetCalculatedWorldPosition();
             _playerInputModel.SetPointerWorldPosition(worldPosition);
+        }
+        
+        private void OnPointerStarted(InputAction.CallbackContext ctx)
+        {
+            var collider = GetHitOnClick().collider;
 
             if (collider == null)
             {
@@ -67,8 +72,8 @@ namespace Source.Scripts.Controllers
         private void OnPointerCanceled(InputAction.CallbackContext ctx)
         {
             _playerInputModel.SetPointerWorldPosition(Vector3.zero);
-            _draggableModel.SetDraggable(null);
             _playerInputModel.SetIsInteractionWithItemState(false);
+            _draggableModel.SetDraggable(null);
         }
 
         private RaycastHit2D GetHitOnClick()

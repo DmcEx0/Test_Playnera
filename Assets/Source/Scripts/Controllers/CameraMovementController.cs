@@ -15,7 +15,6 @@ namespace Source.Scripts.Controllers
         private float _minX;
         private float _maxX;
         
-        private float _smoothSpeed = 5f;
         private Vector3 _previousPointerPosition;
         
         private bool _firstClick = true;
@@ -47,11 +46,11 @@ namespace Source.Scripts.Controllers
             _minX = _camera.transform.position.x - (bgWidth / 2 - halfCamWidth);
             _maxX = _camera.transform.position.x + (bgWidth / 2 - halfCamWidth);
             
-            Debug.Log(_camera.transform.position.x);
-            Debug.Log(bgWidth);
-            Debug.Log(halfCamWidth);
-            Debug.Log(_minX);
-            Debug.Log(_maxX);
+            // Debug.Log(_camera.transform.position.x);
+            // Debug.Log(bgWidth);
+            // Debug.Log(halfCamWidth);
+            // Debug.Log(_minX);
+            // Debug.Log(_maxX);
         }
         
         private void MoveCamera(Vector3 pointerWorldPosition)
