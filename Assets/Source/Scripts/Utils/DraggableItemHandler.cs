@@ -27,7 +27,7 @@ namespace Source.Scripts.Utils
 
             draggableItemView.transform.DOScale(1.2f, 0.3f);
             draggableItemView.Rb.bodyType = RigidbodyType2D.Kinematic;
-            draggableItemView.Collider.isTrigger = true;
+            draggableItemView.ChildTriggerHandler.Collider.isTrigger = true;
         }
 
         public void EndDrag(DraggableItemView draggableItemView)
@@ -37,7 +37,7 @@ namespace Source.Scripts.Utils
             if (draggableItemView.ChildTriggerHandler.IsInsidePlaceable == false)
             {
                 draggableItemView.Rb.bodyType = RigidbodyType2D.Dynamic;
-                draggableItemView.Collider.isTrigger = false;
+                draggableItemView.ChildTriggerHandler.Collider.isTrigger = false;
             }
         }
     }

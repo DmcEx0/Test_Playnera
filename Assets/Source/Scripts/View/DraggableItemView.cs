@@ -9,7 +9,6 @@ namespace Source.Scripts.View
     {
         [field: SerializeField] public Transform Origin { get; private set; }
         [field: SerializeField] public Rigidbody2D Rb { get; private set; }
-        [field: SerializeField] public Collider2D Collider { get; private set; }
         [field: SerializeField] public ChildTriggerHandler ChildTriggerHandler { get; private set; }
     }
 }
