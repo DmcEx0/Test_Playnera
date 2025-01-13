@@ -1,5 +1,4 @@
-﻿using Source.Scripts.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Source.Scripts.View
 {
@@ -8,6 +7,6 @@ namespace Source.Scripts.View
     {
         [field: SerializeField] public Transform Origin { get; private set; }
         [field: SerializeField] public Rigidbody2D Rb { get; private set; }
-        [field: SerializeField] public ChildTriggerHandler ChildTriggerHandler { get; private set; }
+        [field: SerializeField] public ChildTriggerView ChildTriggerView { get; private set; }
     }
 }

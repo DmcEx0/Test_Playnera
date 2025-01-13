@@ -3,7 +3,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Source.Scripts.Models;
-using Source.Scripts.Utils;
 using Source.Scripts.View;
 using UnityEngine;
 using VContainer.Unity;

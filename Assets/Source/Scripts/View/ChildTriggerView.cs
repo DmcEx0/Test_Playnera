@@ -1,11 +1,10 @@
-﻿using Source.Scripts.View;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Source.Scripts.Utils
+namespace Source.Scripts.View
 {
     //вспомогательный класс для дочернего коллайдера предмета, реагирующий на столкновения с другими коллайдерами
     [RequireComponent(typeof(Collider2D))]
-    public class ChildTriggerHandler : MonoBehaviour
+    public class ChildTriggerView : MonoBehaviour
     {
         public bool IsInsidePlaceable { get; private set; }
         public Collider2D Collider { get; private set; }

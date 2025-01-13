@@ -3,7 +3,7 @@ using Source.Scripts.Configs;
 using Source.Scripts.View;
 using UnityEngine;
 
-namespace Source.Scripts.Utils
+namespace Source.Scripts.Models
 {
     //класс-обработчик для предметов
     public class DraggableItemHandler
@@ -38,7 +38,7 @@ namespace Source.Scripts.Utils
 
             draggableItemView.transform.DOScale(_gameConfig.ItemScaleOnDrag, _gameConfig.ItemAnimationDurationOnDrag);
             draggableItemView.Rb.bodyType = RigidbodyType2D.Kinematic;
-            draggableItemView.ChildTriggerHandler.Collider.isTrigger = true;
+            draggableItemView.ChildTriggerView.Collider.isTrigger = true;
         }
 
         public void EndDrag(DraggableItemView draggableItemView)
@@ -46,10 +46,10 @@ namespace Source.Scripts.Utils
             var endScaleValue = GetScaleYRelativeToBackground(draggableItemView);
             draggableItemView.transform.DOScale(endScaleValue, _gameConfig.ItemAnimationDurationAfterDrag);
 
-            if (draggableItemView.ChildTriggerHandler.IsInsidePlaceable == false)
+            if (draggableItemView.ChildTriggerView.IsInsidePlaceable == false)
             {
                 draggableItemView.Rb.bodyType = RigidbodyType2D.Dynamic;
-                draggableItemView.ChildTriggerHandler.Collider.isTrigger = false;
+                draggableItemView.ChildTriggerView.Collider.isTrigger = false;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Source.Scripts.Utils
         //находим расстояние до ближайшего коллайдера под предметом для корректного определения размера 
         private float GetDistanceToCollidersUnderItem(DraggableItemView draggableItemView)
         {
-            RaycastHit2D hit = Physics2D.Raycast(draggableItemView.ChildTriggerHandler.transform.position,
+            RaycastHit2D hit = Physics2D.Raycast(draggableItemView.ChildTriggerView.transform.position,
                 Vector2.down, 100f, ~_gameConfig.ItemLayerMask);
             
             if(hit.collider == null)

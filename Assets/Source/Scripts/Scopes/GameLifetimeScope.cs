@@ -1,7 +1,6 @@
 using Source.Scripts.Configs;
 using Source.Scripts.Controllers;
 using Source.Scripts.Models;
-using Source.Scripts.Utils;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
