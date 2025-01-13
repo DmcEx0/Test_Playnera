@@ -60,25 +60,26 @@ namespace Source.Scripts.Controllers
 
         //поскольку вызывается, когда игрок нажал на предмет и отпустил его,
         //вызываем методы для начала и окончания перетаскивания
-        private void ConfigureNewDraggable(IDraggable draggable) 
+        private void ConfigureNewDraggable(DraggableItemView draggable) 
         {
             if (_isHaveDraggableItemView)
             {
                 _draggableItemHandler.EndDrag(_currentDraggableItemView);
             }
 
-            CastingDraggableItemView(draggable);
+            SetDraggableItem(draggable);
+            
+            _currentDraggableItemView = draggable;
 
             if (_isHaveDraggableItemView)
             {
                 _draggableItemHandler.StartDrag(_currentDraggableItemView, _playerInputModel.StartPointerPosition);
             }
         }
-
-        //кастим из интерфейса в конкретный тип
-        private void CastingDraggableItemView(IDraggable draggable)
+        
+        private void SetDraggableItem(DraggableItemView draggableItemView)
         {
-            if (draggable is DraggableItemView draggableItemView)
+            if (draggableItemView != null)
             {
                 _currentDraggableItemView = draggableItemView;
                 _isHaveDraggableItemView = true;

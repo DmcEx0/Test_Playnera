@@ -75,7 +75,7 @@ namespace Source.Scripts.Controllers
                 return;
             }
             
-            if (collider.TryGetComponent(out IDraggable draggable)) // обработка нажатия на предмет 
+            if (collider.TryGetComponent(out DraggableItemView draggable)) // обработка нажатия на предмет 
             {
                 //определение позиции поинтера в момент клика, для корректного перемещения предмета, относительно поинтера
                 _playerInputModel.SetStartPointerPosition(GetCalculatedWorldPosition()); 

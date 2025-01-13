@@ -2,7 +2,7 @@
 
 namespace Source.Scripts.View
 {
-    public class PlaceableItemView : MonoBehaviour, IPlaceable
+    public class PlaceableItemView : MonoBehaviour
     {
     }
 }

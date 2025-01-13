@@ -79,8 +79,6 @@ namespace Source.Scripts.Models
                 return 0f;
             }
             
-            Debug.Log(hit.collider.gameObject.name);
-            
             return hit.distance;
         }
     }

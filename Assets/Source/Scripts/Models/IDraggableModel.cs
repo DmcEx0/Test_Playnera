@@ -5,8 +5,8 @@ namespace Source.Scripts.Models
 {
     public interface IDraggableModel
     {
-        public IAsyncReactiveProperty<IDraggable> Draggable { get; }
+        public IAsyncReactiveProperty<DraggableItemView> Draggable { get; }
 
-        public void SetDraggable(IDraggable draggable);
+        public void SetDraggable(DraggableItemView draggable);
     }
 }

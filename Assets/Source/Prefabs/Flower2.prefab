@@ -267,6 +267,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4357f5051b491fb907957a440ac511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Origin>k__BackingField: {fileID: 8302648497191485596}
   <Rb>k__BackingField: {fileID: 5983815903694557925}
-  <ChildTriggerHandler>k__BackingField: {fileID: 3483847571215218341}
+  <ChildTriggerView>k__BackingField: {fileID: 3483847571215218341}

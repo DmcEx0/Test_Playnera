@@ -16,7 +16,7 @@ namespace Source.Scripts.View
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IPlaceable placeable))
+            if (other.TryGetComponent(out PlaceableItemView placeable))
             {
                 IsInsidePlaceable = true;
             }
@@ -24,7 +24,7 @@ namespace Source.Scripts.View
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IPlaceable placeable))
+            if (other.TryGetComponent(out PlaceableItemView placeable))
             {
                 IsInsidePlaceable = false;
             }

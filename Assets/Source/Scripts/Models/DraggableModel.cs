@@ -6,15 +6,15 @@ namespace Source.Scripts.Models
     //модель для связи между контроллерами
     public class DraggableModel : IDraggableModel
     {
-        private readonly AsyncReactiveProperty<IDraggable> _draggable;
-        public IAsyncReactiveProperty<IDraggable> Draggable => _draggable;
+        private readonly AsyncReactiveProperty<DraggableItemView> _draggable;
+        public IAsyncReactiveProperty<DraggableItemView> Draggable => _draggable;
 
         public DraggableModel()
         {
-            _draggable = new AsyncReactiveProperty<IDraggable>(null);
+            _draggable = new AsyncReactiveProperty<DraggableItemView>(null);
         }
         
-        public void SetDraggable(IDraggable draggable)
+        public void SetDraggable(DraggableItemView draggable)
         {
             _draggable.Value = draggable;
         }
